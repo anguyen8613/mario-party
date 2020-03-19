@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {createProject} from '../../store/actions/projectActions';
 
 class CreateProject extends Component {
   state = {
@@ -12,6 +14,7 @@ class CreateProject extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.createProject(this.state);
     console.log(this.state);
   }
   render() {
@@ -36,4 +39,15 @@ class CreateProject extends Component {
   }
 }
 
-export default CreateProject
+//dispatch paremeter is from the store
+const mapDispatchToProps = (dispatch) => {
+
+  //async call
+
+  //dispatch
+  return {
+    createProject: (project) => dispatch(createProject(project))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProject);
